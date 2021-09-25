@@ -1,0 +1,22 @@
+{
+  "name": "budgie-react",
+  "version": "0.0.1",
+  "description": "budgie-react is a react-redux boilerplate with routing running on a webpack server. By, using budgie-react, we can create components and pages with auto redux mapping, More exciting features comming in newer releases...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "budgie:init": "node index.js"
+  },
+  "keywords": [
+    "React",
+    "Redux",
+    "React-Redux",
+    "React-Router-DOM",
+    "Webpack"
+  ],
+  "bin": {
+    "budgie": "bin/index.js"
+  },
+  "author": "Yash Datir",
+  "license": "ISC"
+}
