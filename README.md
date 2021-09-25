@@ -7,7 +7,7 @@ Budgie React is a CLI boilerplate creator for ReactJS.
 Use the package manager [npm](https://www.npmjs.com/package/budgie-react) to install foobar.
 
 ```bash
-npm i -g budgie-react
+$ npm i -g budgie-react
 ```
 
 ## Usage
@@ -58,6 +58,6 @@ PERFORMANCE OF THIS SOFTWARE.
 1) Menu driven package selection and installation,
 2) Proper functioning boiler plate,
 3) Arrangements for UI framework selection,
-4) creation of components and pages using CLI,
+4) Creation of components and pages using CLI,
 5) Router stability,
-6) Hot reload
+6) Hot reload etc...
