@@ -16,35 +16,37 @@ let state = {
 		entry: 'index.js',
 		scripts: {
 			test: 'echo "Error: no test specified" && exit 1',
-			'start:dev': 'webpack-dev-server .',
-			build: 'webpack .',
+			'start:dev': 'webpack serve --mode development',
+			build: 'webpack --mode production',
 		},
 		keywords: [],
 		author: '',
 		license: 'ISC',
 		devDependencies: {
-			'@babel/core': '^7.15.5',
+			'@babel/core': '^7.23.9',
 			'@babel/plugin-syntax-dynamic-import': '^7.8.3',
-			'@babel/plugin-transform-runtime': '^7.15.0',
-			'@babel/preset-env': '^7.15.6',
-			'@babel/preset-react': '^7.14.5',
-			'@babel/runtime': '^7.15.4',
+			'@babel/plugin-transform-runtime': '^7.23.9',
+			'@babel/preset-env': '^7.23.9',
+			'@babel/preset-react': '^7.23.9',
+			'@babel/runtime': '^7.23.9',
 			'babel-eslint': '^10.1.0',
-			'babel-loader': '^8.2.2',
-			eslint: '^7.32.0',
-			'eslint-config-airbnb-base': '^14.2.1',
-			'eslint-config-prettier': '^8.3.0',
-			'eslint-plugin-jest': '^24.4.2',
-			webpack: '^4.43.0',
-			'webpack-cli': '^3.3.1',
-			'webpack-dev-server': '^3.10.3',
+			'babel-loader': '^9.1.3',
+			eslint: '^8.56.0',
+			'eslint-config-airbnb-base': '^15.0.0',
+			'eslint-config-prettier': '^9.1.0',
+			'eslint-plugin-jest': '^27.6.3',
+			webpack: '^5.90.3',
+			'webpack-cli': '^5.1.4',
+			'webpack-dev-server': '^4.15.1',
 		},
 		dependencies: {
-			react: '^17.0.2',
-			'react-dom': '^17.0.2',
-			'react-redux': '^7.2.5',
-			'react-router-dom': '^5.3.0',
-			redux: '^4.1.1',
+			react: '^18.2.0',
+			'react-dom': '^18.2.0',
+			'react-redux': '^9.1.0',
+			'react-router-dom': '^6.22.1',
+			redux: '^5.0.1',
+			'redux-thunk': '^3.1.0',
+			'redux-devtools-extension': '^2.13.9'
 		},
 	},
 	webpackFileContent: `
@@ -55,14 +57,18 @@ module.exports = {
     entry: "./index.js",
     output: {
         path: path.resolve(__dirname, "public"),
-        filename: "main.js"
+        filename: "main.js",
+        publicPath: '/'
     },
-    target: "node",
+    target: "web",
     devServer: {
         port: "3000",
-        contentBase: ["./public"],
+        static: {
+            directory: path.join(__dirname, "public"),
+        },
         open: true,
         historyApiFallback: true,
+        hot: true
     },
     resolve: {
         extensions: [".js", ".jsx", ".json"]
@@ -80,10 +86,28 @@ module.exports = {
     `,
     indexContent: `
     import React from 'react';
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
 import AppInit from "./app/AppInit";
 
-ReactDOM.render(<AppInit />, document.getElementById("root"));
+const store = configureStore({
+    reducer: {
+        // Add your reducers here
+    }
+});
+
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+root.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <AppInit />
+        </BrowserRouter>
+    </Provider>
+);
     `,
     babelrcContent: `{
         "presets": ["@babel/preset-env", "@babel/preset-react"],
@@ -190,10 +214,14 @@ function create_react(name) {
         fs.writeFileSync(
 			`./${name}/app/AppInit.jsx`,
 			`
-            import React from "react"
+            import React from "react";
+            import { Routes, Route } from "react-router-dom";
+
             const AppInit = () => {
                 return (
-                    <>Hello World</>
+                    <Routes>
+                        <Route path="/" element={<div>Hello World</div>} />
+                    </Routes>
                 )
             }
             export default AppInit
