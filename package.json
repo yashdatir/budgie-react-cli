@@ -1,22 +1,39 @@
 {
   "name": "budgie-react",
-  "version": "0.0.2",
-  "description": "budgie-react is a react-redux boilerplate with routing running on a webpack server. By, using budgie-react, we can create components and pages with auto redux mapping, More exciting features comming in newer releases...",
+  "version": "2.0.2",
+  "description": "🐦 Flexible React project initializer — TypeScript, Redux Toolkit, React Router v6, Error Boundaries, Axios and more.",
   "main": "index.js",
+  "bin": {
+    "budgie-react": "./index.js",
+    "create-budgie-app": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "console.js",
+    "generator.js",
+    "prompts.js"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "budgieInit": "node index.js"
+    "test": "node -e \"require('./console'); require('./generator'); console.log('All modules load OK')\"",
+    "prepublishOnly": "npm test"
   },
   "keywords": [
-    "React",
-    "Redux",
-    "React-Redux",
-    "React-Router-DOM",
-    "Webpack"
+    "react", "typescript", "boilerplate", "template", "cli",
+    "redux", "redux-toolkit", "react-router", "webpack", "babel",
+    "create-react-app", "scaffolding", "starter", "budgie"
   ],
-  "bin": {
-    "budgieInit": "index.js"
-  },
   "author": "Yash Datir",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yashdatir/budgie-react.git"
+  },
+  "homepage": "https://github.com/yashdatir/budgie-react#readme",
+  "bugs": {
+    "url": "https://github.com/yashdatir/budgie-react/issues"
+  }
 }
